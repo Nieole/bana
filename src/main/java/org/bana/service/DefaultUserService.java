@@ -1,6 +1,7 @@
 package org.bana.service;
 
 import java.io.Serializable;
+import org.bana.adapter.DataAdapter;
 import org.bana.entity.DefaultUserEntity;
 import org.bana.entity.RoleEntity;
 import org.casbin.jcasbin.main.Enforcer;

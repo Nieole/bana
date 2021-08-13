@@ -3,6 +3,7 @@ package org.bana.service;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.stream.Collectors;
+import org.bana.adapter.DataAdapter;
 import org.bana.entity.PermissionEntity;
 import org.casbin.jcasbin.main.Enforcer;
 

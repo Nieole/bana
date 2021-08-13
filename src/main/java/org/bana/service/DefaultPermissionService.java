@@ -1,5 +1,6 @@
 package org.bana.service;
 
+import org.bana.adapter.DataAdapter;
 import org.bana.entity.DefaultPermissionEntity;
 import org.casbin.jcasbin.main.Enforcer;
 

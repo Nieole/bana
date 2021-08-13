@@ -2,6 +2,7 @@ package org.bana.service;
 
 import java.io.Serializable;
 import java.util.Collection;
+import org.bana.adapter.DataAdapter;
 import org.bana.entity.BaseEntity;
 import org.casbin.jcasbin.main.Enforcer;
 

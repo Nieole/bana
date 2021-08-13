@@ -1,4 +1,4 @@
-package org.bana.service;
+package org.bana.adapter;
 
 import java.io.Serializable;
 import java.util.Collection;
