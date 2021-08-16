@@ -1,5 +1,5 @@
 plugins {
-    id 'java'
+    id 'java-library'
     id 'maven-publish'
 }
 
@@ -12,8 +12,8 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.casbin:jcasbin:1.13.1'
-    implementation 'io.vavr:vavr:0.10.4'
+    api 'org.casbin:jcasbin:1.13.1'
+    api 'io.vavr:vavr:0.10.4'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.2'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.2'
 }
