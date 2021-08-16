@@ -1,13 +1,15 @@
 package org.bana.entity;
 
 import io.vavr.collection.List;
+import java.io.Serializable;
 import java.util.Map;
 import java.util.Objects;
 import org.bana.utils.StringUtils;
 import org.casbin.jcasbin.model.Assertion;
 import org.casbin.jcasbin.model.Model;
 
-public class CasbinRule {
+public class CasbinRule<ID> implements Serializable {
+  private ID id;
   private String ptype;
   private String v0;
   private String v1;
@@ -17,6 +19,14 @@ public class CasbinRule {
   private String v5;
   private String v6;
   private String v7;
+
+  public ID getId() {
+    return id;
+  }
+
+  public void setId(ID id) {
+    this.id = id;
+  }
 
   public String getPtype() {
     return ptype;
@@ -98,19 +108,19 @@ public class CasbinRule {
     return policy;
   }
 
-  public static List<CasbinRule> transformToCasbinRule(Model model) {
+  public static <ID> List<CasbinRule<ID>> transformToCasbinRule(Model model) {
     return List.ofAll(model.model.values())
         .flatMap(Map::values)
         .flatMap(CasbinRule::rule);
   }
 
-  private static List<CasbinRule> rule(Assertion assertion){
+  private static <ID> List<CasbinRule<ID>> rule(Assertion assertion){
     if (assertion.policy.isEmpty()){
       return List.empty();
     }
     return List.ofAll(assertion.policy)
         .map(p -> {
-          CasbinRule rule = new CasbinRule();
+          CasbinRule<ID> rule = new CasbinRule<>();
           rule.setPtype(assertion.key);
           rule.setV0(p.get(0));
           if (p.size() >= 2) {
@@ -146,16 +156,16 @@ public class CasbinRule {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    CasbinRule that = (CasbinRule) o;
-    return Objects.equals(ptype, that.ptype) && Objects.equals(v0, that.v0)
-        && Objects.equals(v1, that.v1) && Objects.equals(v2, that.v2)
-        && Objects.equals(v3, that.v3) && Objects.equals(v4, that.v4)
-        && Objects.equals(v5, that.v5) && Objects.equals(v6, that.v6)
-        && Objects.equals(v7, that.v7);
+    CasbinRule<?> that = (CasbinRule<?>) o;
+    return Objects.equals(id, that.id) && Objects.equals(ptype, that.ptype)
+        && Objects.equals(v0, that.v0) && Objects.equals(v1, that.v1)
+        && Objects.equals(v2, that.v2) && Objects.equals(v3, that.v3)
+        && Objects.equals(v4, that.v4) && Objects.equals(v5, that.v5)
+        && Objects.equals(v6, that.v6) && Objects.equals(v7, that.v7);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(ptype, v0, v1, v2, v3, v4, v5, v6, v7);
+    return Objects.hash(id, ptype, v0, v1, v2, v3, v4, v5, v6, v7);
   }
 }
