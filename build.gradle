@@ -1,20 +1,41 @@
 plugins {
     id 'java'
+    id 'maven-publish'
 }
 
 group 'org.bana'
-version '1.0-SNAPSHOT'
+version '0.0.1-SNAPSHOT'
 
 repositories {
+    mavenLocal()
     mavenCentral()
 }
 
 dependencies {
     implementation 'org.casbin:jcasbin:1.13.1'
+    implementation 'io.vavr:vavr:0.10.4'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.2'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.2'
 }
 
 test {
     useJUnitPlatform()
+}
+
+publishing{
+    repositories {
+        maven {
+            name = 'localRepo'
+            url = "file://${buildDir}/repo"
+        }
+    }
+    publications{
+        mavenJava(MavenPublication){
+            groupId = "org.bana"
+            artifactId = "bana"
+            version = "0.0.1-SNAPSHOT"
+
+            from components.java
+        }
+    }
 }
