@@ -16,6 +16,14 @@ public abstract class BaseService<Entity extends BaseEntity<ID>, ID extends Seri
     this.enforcer = enforcer;
   }
 
+  public DataAdapter<Entity, ID> getDataAdapter() {
+    return dataAdapter;
+  }
+
+  public Enforcer getEnforcer() {
+    return enforcer;
+  }
+
   /**
    * id to ID
    *
