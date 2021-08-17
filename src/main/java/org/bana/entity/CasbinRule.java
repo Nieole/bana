@@ -1,11 +1,8 @@
 package org.bana.entity;
 
 import io.vavr.collection.List;
-import java.util.Map;
 import java.util.Objects;
 import org.bana.utils.StringUtils;
-import org.casbin.jcasbin.model.Assertion;
-import org.casbin.jcasbin.model.Model;
 
 public abstract class CasbinRule<ID> implements Rule {
   private ID id;
@@ -106,77 +103,6 @@ public abstract class CasbinRule<ID> implements Rule {
         .peek(policy::append);
     return policy;
   }
-
-//  public static <R extends CasbinRule<ID>,ID> List<R> transformToCasbinRule(Model model) {
-//    return List.ofAll(model.model.values())
-//        .flatMap(Map::values)
-//        .flatMap(CasbinRule::rule);
-//  }
-//
-//  private static <Rule extends CasbinRule<ID>,ID> List<Rule> rule(Assertion assertion){
-//    if (assertion.policy.isEmpty()){
-//      return List.empty();
-//    }
-//    return List.ofAll(assertion.policy)
-//        .map(p -> {
-//          CasbinRule<ID> rule = new CasbinRule<>();
-//          rule.setPtype(assertion.key);
-//          rule.setV0(p.get(0));
-//          if (p.size() >= 2) {
-//            rule.setV1(p.get(1));
-//          }
-//          if (p.size() >= 3) {
-//            rule.setV2(p.get(2));
-//          }
-//          if (p.size() >= 4) {
-//            rule.setV3(p.get(3));
-//          }
-//          if (p.size() >= 5) {
-//            rule.setV4(p.get(4));
-//          }
-//          if (p.size() >= 6) {
-//            rule.setV5(p.get(5));
-//          }
-//          if (p.size() >= 7) {
-//            rule.setV6(p.get(6));
-//          }
-//          if (p.size() >= 8) {
-//            rule.setV7(p.get(7));
-//          }
-//          return rule;
-//        });
-//  }
-//
-//  public static class DefaultCasbinRule extends CasbinRule<String>{
-//
-//    <Rule extends CasbinRule<String>> Rule get(String key, List<String> policy) {
-//      DefaultCasbinRule rule = new DefaultCasbinRule();
-//      rule.setPtype(key);
-//      rule.setV0(policy.get(0));
-//      if (policy.size() >= 2) {
-//        rule.setV1(policy.get(1));
-//      }
-//      if (policy.size() >= 3) {
-//        rule.setV2(policy.get(2));
-//      }
-//      if (policy.size() >= 4) {
-//        rule.setV3(policy.get(3));
-//      }
-//      if (policy.size() >= 5) {
-//        rule.setV4(policy.get(4));
-//      }
-//      if (policy.size() >= 6) {
-//        rule.setV5(policy.get(5));
-//      }
-//      if (policy.size() >= 7) {
-//        rule.setV6(policy.get(6));
-//      }
-//      if (policy.size() >= 8) {
-//        rule.setV7(policy.get(7));
-//      }
-//      return (Rule) rule;
-//    }
-//  }
 
   @Override
   public boolean equals(Object o) {
