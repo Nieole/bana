@@ -65,7 +65,7 @@ public interface Adapter extends FilteredAdapter {
     removeFilteredPolicy(sec, ptype, 0, rule.toArray(new String[0]));
   }
 
-  List<Rule> loadAllRule();
+  List<? extends Rule> loadAllRule();
 
   default boolean filterCasbinRule(io.vavr.collection.List<String> policy, Filter filter) {
     String[] filterSlice = new String[]{};
