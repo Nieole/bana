@@ -2,10 +2,11 @@ package org.bana.entity;
 
 import io.vavr.collection.List;
 import java.util.Objects;
+import javax.persistence.MappedSuperclass;
 import org.bana.utils.StringUtils;
 
+@MappedSuperclass
 public abstract class CasbinRule<ID> implements Rule {
-  private ID id;
   private String ptype;
   private String v0;
   private String v1;
@@ -15,14 +16,6 @@ public abstract class CasbinRule<ID> implements Rule {
   private String v5;
   private String v6;
   private String v7;
-
-  public ID getId() {
-    return id;
-  }
-
-  public void setId(ID id) {
-    this.id = id;
-  }
 
   public String getPtype() {
     return ptype;
@@ -113,15 +106,15 @@ public abstract class CasbinRule<ID> implements Rule {
       return false;
     }
     CasbinRule<?> that = (CasbinRule<?>) o;
-    return Objects.equals(id, that.id) && Objects.equals(ptype, that.ptype)
-        && Objects.equals(v0, that.v0) && Objects.equals(v1, that.v1)
-        && Objects.equals(v2, that.v2) && Objects.equals(v3, that.v3)
-        && Objects.equals(v4, that.v4) && Objects.equals(v5, that.v5)
-        && Objects.equals(v6, that.v6) && Objects.equals(v7, that.v7);
+    return Objects.equals(ptype, that.ptype) && Objects.equals(v0, that.v0)
+        && Objects.equals(v1, that.v1) && Objects.equals(v2, that.v2)
+        && Objects.equals(v3, that.v3) && Objects.equals(v4, that.v4)
+        && Objects.equals(v5, that.v5) && Objects.equals(v6, that.v6)
+        && Objects.equals(v7, that.v7);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, ptype, v0, v1, v2, v3, v4, v5, v6, v7);
+    return Objects.hash(ptype, v0, v1, v2, v3, v4, v5, v6, v7);
   }
 }
