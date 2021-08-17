@@ -3,13 +3,15 @@ package org.bana.adapter;
 import io.vavr.collection.Traversable;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import org.bana.entity.Rule;
 import org.casbin.jcasbin.exception.CasbinAdapterException;
+import org.casbin.jcasbin.model.Assertion;
 import org.casbin.jcasbin.model.Model;
 import org.casbin.jcasbin.persist.FilteredAdapter;
 
-public interface Adapter extends FilteredAdapter {
+public interface Adapter<R extends Rule> extends FilteredAdapter {
   /**
    * the filter class. Enforcer only accept this filter currently.
    */
@@ -19,7 +21,14 @@ public interface Adapter extends FilteredAdapter {
     public String[] g;
   }
 
-  List<? extends Rule> transformToCasbinRule(Model model);
+  default List<R> transformToCasbinRule(Model model){
+    return io.vavr.collection.List.ofAll(model.model.values())
+        .flatMap(Map::values)
+        .flatMap(this::transform)
+        .toJavaList();
+  }
+
+  io.vavr.collection.List<R> transform(Assertion assertion);
 
   void setIsFiltered(Boolean isFiltered);
 
@@ -65,7 +74,14 @@ public interface Adapter extends FilteredAdapter {
     removeFilteredPolicy(sec, ptype, 0, rule.toArray(new String[0]));
   }
 
-  List<? extends Rule> loadAllRule();
+  List<R> loadAllRule();
+  void deleteAll();
+  void saveAll(List<R> rules);
+
+  default void savePolicy(Model model){
+    deleteAll();
+    saveAll(transformToCasbinRule(model));
+  }
 
   default boolean filterCasbinRule(io.vavr.collection.List<String> policy, Filter filter) {
     String[] filterSlice = new String[]{};
