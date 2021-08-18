@@ -8,14 +8,14 @@ import org.bana.entity.RoleEntity;
 import org.bana.entity.UserEntity;
 import org.casbin.jcasbin.main.Enforcer;
 
-public abstract class AbstractUserService<Entity extends UserEntity<ID>, ID extends Serializable> extends
+public abstract class UserService<Entity extends UserEntity<ID>, ID extends Serializable> extends
     BaseService<Entity, ID> {
 
-  protected final AbstractRoleService roleService;
+  protected final RoleService roleService;
 
-  public <R extends RoleEntity<RI>, RI extends Serializable> AbstractUserService(
+  public <R extends RoleEntity<RI>, RI extends Serializable> UserService(
       DataAdapter<Entity, ID> dataAdapter, Enforcer enforcer,
-      AbstractRoleService<R, RI> roleService
+      RoleService<R, RI> roleService
   ) {
     super(dataAdapter, enforcer);
     this.roleService = roleService;

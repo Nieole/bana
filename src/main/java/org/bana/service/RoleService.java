@@ -8,14 +8,14 @@ import org.bana.entity.PermissionEntity;
 import org.bana.entity.RoleEntity;
 import org.casbin.jcasbin.main.Enforcer;
 
-public abstract class AbstractRoleService<Entity extends RoleEntity<ID>, ID extends Serializable> extends
+public abstract class RoleService<Entity extends RoleEntity<ID>, ID extends Serializable> extends
     BaseService<Entity, ID> {
 
-  protected final AbstractPermissionService permissionService;
+  protected final PermissionService permissionService;
 
-  public <E extends PermissionEntity<I>, I extends Serializable> AbstractRoleService(
+  public <E extends PermissionEntity<I>, I extends Serializable> RoleService(
       DataAdapter<Entity, ID> dataAdapter, Enforcer enforcer,
-      AbstractPermissionService<E, I> permissionService) {
+      PermissionService<E, I> permissionService) {
     super(dataAdapter, enforcer);
     this.permissionService = permissionService;
   }

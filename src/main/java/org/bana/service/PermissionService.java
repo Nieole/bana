@@ -7,10 +7,10 @@ import org.bana.adapter.DataAdapter;
 import org.bana.entity.PermissionEntity;
 import org.casbin.jcasbin.main.Enforcer;
 
-public abstract class AbstractPermissionService<Entity extends PermissionEntity<ID>, ID extends Serializable> extends
+public abstract class PermissionService<Entity extends PermissionEntity<ID>, ID extends Serializable> extends
     BaseService<Entity, ID> {
 
-  public AbstractPermissionService(DataAdapter<Entity, ID> dataAdapter,
+  public PermissionService(DataAdapter<Entity, ID> dataAdapter,
       Enforcer enforcer) {
     super(dataAdapter, enforcer);
   }
