@@ -2,19 +2,29 @@ package org.bana.entity;
 
 import io.vavr.collection.List;
 import java.util.Objects;
+import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import org.bana.utils.StringUtils;
 
 @MappedSuperclass
 public abstract class CasbinRule<ID> implements Rule {
+  @Column(length = 500)
   private String ptype;
+  @Column(length = 500)
   private String v0;
+  @Column(length = 500)
   private String v1;
+  @Column(length = 500)
   private String v2;
+  @Column(length = 500)
   private String v3;
+  @Column(length = 500)
   private String v4;
+  @Column(length = 500)
   private String v5;
+  @Column(length = 500)
   private String v6;
+  @Column(length = 500)
   private String v7;
 
   public String getPtype() {
